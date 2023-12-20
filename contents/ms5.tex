@@ -1,0 +1,3618 @@
+\section{Test Cases for API Endpoints}
+\subsection{A pic of implemented test case}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ms5_pic1.png}}
+    \caption{Some implemented test cases using Python}
+    \label{fig:ms5_testCases}
+\end{figure}
+
+\begin{testcase}{1}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Auth token missing\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' 
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{2}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill All information required correct and present\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+--url http://localhost/api/v1/profile \
+--header 'Accept: application/json' \
+--header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+   "email": "abc@xyz.com",
+   "role": "student",
+   "bio": {
+     "maximum_courses_in_a_term": 3,
+     "current_degree_level": "foundation",
+     "dp_or_ds": "ds",
+     "current_courses": [
+       "BSHS1001"
+     ],
+     "completed_courses": [
+       {
+         "id": "	BSMA1001",
+         "marks": 70
+       }
+     ]
+   }
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{3}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill All details required match and present\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 201\\
+Actual Response Code    \hfill 201\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 87.9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "created",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{4}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill User details do not exist\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+404
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{5}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Wrong type of user logged in\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+
+% %post basic
+
+\begin{testcase}{6}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Auth token missing\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCDE.png",
+  "maximum_courses_in_a_term": 4,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 92
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{7}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Wrong type of user logged in\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 4,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 90
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{8}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill User Auth does not exist\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCDE.png",
+  "maximum_courses_in_a_term": 2,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 90
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+% %post unique
+\begin{testcase}{9}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Course code uploaded in the 'current\_course' field does not exist in database\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCDE.png",
+  "maximum_courses_in_a_term": 2,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1004"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 90
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{10}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Course code uploaded in the 'completed\_course' field does not exist in database\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2006",
+      "marks": 87.9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{11}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill value in the 'maximum\_courses\_in\_a\_term' field less than 2\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 1,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 87.9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{12}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill value in the 'maximum\_courses\_in\_a\_term' field greater than 4\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 5,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 87.9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{13}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Invalid value in 'current\_degree\_level'\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "graduated",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 87.9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{14}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Invalid value in 'dp\_or\_ds'\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "dk",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 87.9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{15}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Course uploaded in the 'completed\_course' field has marks less than 0\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": -9
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{16}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Course uploaded in the 'completed\_course' field has marks more than 100\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 130
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{17}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Course uploaded in the 'completed\_course' field has marks missing\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "pic": "ABCD.png",
+  "maximum_courses_in_a_term": 3,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%patch basic
+\begin{testcase}{18}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill All details required match and present\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 202\\
+Actual Response Code    \hfill 202\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "maximum_courses_in_a_term": 4,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 99
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "accepted",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{19}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Auth token missing\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "maximum_courses_in_a_term": 4,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 99
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{20}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill Wrong type of user logged in\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "maximum_courses_in_a_term": 4,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 99
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{21}{PASSED}
+Endpoint \hfill \tcendpoint{/profile}\\
+Category \hfill Profile\\
+Test Case Description \hfill User Auth does not exist\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/profile \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "maximum_courses_in_a_term": 4,
+  "current_degree_level": "diploma",
+  "dp_or_ds": "both",
+  "current_courses": [
+    "BSHS1001"
+  ],
+  "completed_courses": [
+    {
+      "id": "BSC2001",
+      "marks": 99
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%All other vaidation and functionality same as POST methods as same function being used in backend
+
+%admin functions
+\begin{testcase}{22}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill All required information correct and present\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+[
+  {
+    "name": "ABCD",
+    "email": "ABCD@EFGH.com",
+    "role": "admin",
+    "created_at": "2012-04-23T18:25:43.511Z"
+  },
+  {
+    "name": "IJKL",
+    "email": "IJKL@EFGH.com",
+    "role": "im",
+    "created_at": "2012-04-23T18:25:43.511Z"
+  }
+]
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{23}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token absent or invalid\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' 
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{24}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token for wrong user type used\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%admin post 
+\begin{testcase}{25}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill All information present and correct\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 201\\
+Actual Response Code    \hfill 201\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "created",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{26}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "emal": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{27}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{28}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token for worng user used\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{29}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Email in request not in database\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "abc@def.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{30}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Email in request smaller than 3 characters\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "a@b",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{31}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill role in request invalid\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "stu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{32}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill role or email field in request missing\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%admins patch 
+\begin{testcase}{32}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill All fields present and correct\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 202\\
+Actual Response Code    \hfill 202\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "accepted",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{33}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "eml": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{34}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{35}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token for wrong type of user used\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{36}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill email for which data is being patched does not exist\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "abc@def.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{37}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill role in request invalid\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+  "role": "im"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{38}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill role or email field in request missing\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/admins \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "email": "IJKL@EFGH.com",
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%admin delete
+\begin{testcase}{39}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill All fields present and correct\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins?email=IJKL%40EFGH.com' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\end{testcase}
+
+\begin{testcase}{40}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins?emai=IJKL%40EFGH.com' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{41}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins?email=IJKL%40EFGH.com' \
+  --header 'Accept: application/json'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{42}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill Auth token for wrong type of user used\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins?email=IJKL%40EFGH.com' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{43}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill email for which data is being deleted does not exist\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins?email=abc%40def.com' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{44}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill email field in request missing\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{45}{PASSED}
+Endpoint \hfill \tcendpoint{/admins}\\
+Category \hfill Admin\\
+Test Case Description \hfill email field in request has less than 3 characters\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url 'http://localhost/api/v1/admins?email=IJK' \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%auth tests
+%login post
+
+\begin{testcase}{46}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth}\\
+Category \hfill Users\\
+Test Case Description \hfill All required inputs present and valid\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json'\
+  --data '{
+  "email": "abc@xyz.com",
+  "password": "abcdef",
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "auth": {
+    "message": "Login successful",
+    "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  },
+  "profile": {
+    "name": "A Student",
+    "email": "abc@xyz.com",
+    "role": "student"
+  }
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{47}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth}\\
+Category \hfill Users\\
+Test Case Description \hfill Invalid email\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json'\
+  --data '{
+  "email": "abc@def.com",
+  "password": "abcdef",
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{48}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth}\\
+Category \hfill Users\\
+Test Case Description \hfill Wrong password\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json'\
+  --data '{
+  "email": "abc@xyz.com",
+  "password": "wrong",
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{49}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth}\\
+Category \hfill Users\\
+Test Case Description \hfill Wrong request syntax\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json'\
+  --data '{
+  "ema": "abc@xyz.com",
+  "password": "abcdef",
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%register post
+\begin{testcase}{50}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill All fields present and correct\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 201\\
+Actual Response Code    \hfill 201\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New Student",
+  "email": "new@stu.com",
+  "password": "newstu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "created",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{51}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Invalid request syntax\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "n": "New Student",
+  "email": "new@stu.com",
+  "password": "newstu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{52}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Email already exists in database\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New Student",
+  "email": "abc@xyz.com",
+  "password": "newstu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{53}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Name smaller than 5 letters in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New",
+  "email": "new@stu.com",
+  "password": "newstu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{54}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Name larger than 55 letters in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "{56_length_name}",
+  "email": "new@stu.com",
+  "password": "newstu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{55}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Email larger than 55 letters in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New Student",
+  "email": "{56_length_mail}",
+  "password": "newstu"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{56}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Password smaller than 5 letters in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New Student",
+  "email": "abc@xyz.com",
+  "password": "n"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{56}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Password larger than 100 letters in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New Student",
+  "email": "abc@xyz.com",
+  "password": "{pass_longer_than_101}"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{56}{PASSED}
+Endpoint \hfill \tcendpoint{/user/auth/register}\\
+Category \hfill Users\\
+Test Case Description \hfill Any field missing in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/user/auth/register \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "New Student"
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%recommender tests
+%get
+\begin{testcase}{57}{PASSED}
+Endpoint \hfill \tcendpoint{/recommendation}\\
+Category \hfill Recommender\\
+Test Case Description \hfill All inputs present and valid\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/recommedation \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "no_courses": 3,
+  "upcoming_term": [
+    "BSC2001",
+    "BSC2002",
+    "BSC2003"
+  ],
+  "matrix_order": [
+    "BSC2001",
+    "BSC2002",
+    "BSC2003",
+    "BSC2004",
+    "BSC2005",
+    "BSC2006",
+    "BSC2007",
+    "BSC2008"
+  ],
+  "recommendation_matrix": [
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  ]
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{58}{PASSED}
+Endpoint \hfill \tcendpoint{/recommendation}\\
+Category \hfill Recommender\\
+Test Case Description \hfill Invalid or missing auth token\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{59}{PASSED}
+Endpoint \hfill \tcendpoint{/recommendation}\\
+Category \hfill Recommender\\
+Test Case Description \hfill Wrong type of user auth sent\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/recommedation \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%course tests
+%get single course info
+\begin{testcase}{60}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill All required fields present and correct\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC2001 \
+  --header 'Accept: application/json, application/xml, multipart/form-data' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "id": "BSC2001",
+  "name": "Course 1",
+  "description": "This is course 1",
+  "difficulty_rating": 8.92,
+  "level": "bsc",
+  "dp_or_ds": "ds",
+  "credits": 4,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{61}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/cours/BSC2001 \
+  --header 'Accept: application/json, application/xml, multipart/form-data' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{62}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC2001 \
+  --header 'Accept: application/json, application/xml, multipart/form-data'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{63}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Id in request does not exist\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC20 \
+  --header 'Accept: application/json, application/xml, multipart/form-data' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%patch single course info
+\begin{testcase}{64}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill All required fields present and correct\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 202\\
+Actual Response Code    \hfill 202\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/course/BSC2002 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 3,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "accepted",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{65}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/course/BSC2002 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "na": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 3,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{66}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/course/BSC2002 \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 3,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{67}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Sent Auth of wrong user type\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/course/BSC2002 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 3,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{68}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Course Id does not exist in system\\
+
+Request Type    \hfill \eptype{PATCH}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request PATCH \
+  --url http://localhost/api/v1/course/BSC20 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 3,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%delete course by ID
+\begin{testcase}{69}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill All required fields present and correct\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url http://localhost/api/v1/course/BSC2001 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{70}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url http://localhost/api/v1/coure/BSC2001 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{71}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url http://localhost/api/v1/course/BSC2001 \
+  --header 'Accept: application/json' 
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{72}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Sent Auth of wrong user type\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url http://localhost/api/v1/course/BSC2001 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{73}{PASSED}
+Endpoint \hfill \tcendpoint{/courses/\{id\}}\\
+Category \hfill Courses\\
+Test Case Description \hfill Course Id does not exist in system\\
+
+Request Type    \hfill \eptype{DELETE}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request DELETE \
+  --url http://localhost/api/v1/course/BSC20 \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%get all courses
+\begin{testcase}{74}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill All required fields present and correct\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "courses": [
+    {
+      "id": "BSC2001",
+      "name": "Course 1",
+      "description": "This is course 1",
+      "difficulty_rating": 8.92,
+      "level": "Bsc",
+      "credits": 4,
+      "dp_or_ds": "dp",
+      "pre_req": [
+        "BSC2001",
+        "BSC2002"
+      ],
+      "co_req": [
+        "BSC2001",
+        "BSC2002"
+      ],
+      "availability": [
+        "Sept2022",
+        "March2002"
+      ],
+      "instructors": [
+        {
+          "name": "ABCD",
+          "email": "ABCD@efgh.com"
+        },
+        {
+          "name": "EFGH",
+          "email": "ijkl@efgh.com"
+        }
+      ]
+    }
+  ]
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{75}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' 
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{76}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill Sent Auth of wrong user type\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{77}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill No courses in system\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%post new courses
+\begin{testcase}{78}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill All required fields present and correct\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 201\\
+Actual Response Code    \hfill 201\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "code": "BSC2001",
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 4,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "created",
+  "status": "success"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+
+\begin{testcase}{79}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "code": "BSC2001",
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 4,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+401
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{80}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill Sent Auth of wrong user type\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "code": "BSC2001",
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 4,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{81}{PASSED}
+Endpoint \hfill \tcendpoint{/courses}\\
+Category \hfill Courses\\
+Test Case Description \hfill Syntax error in request\\
+
+Request Type    \hfill \eptype{POST}\\
+Expected Response Code    \hfill 400\\
+Actual Response Code    \hfill 400\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request POST \
+  --url http://localhost/api/v1/courses \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer ***' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "coe": "BSC2001",
+  "name": "Course 1",
+  "description": "This is course 1",
+  "level": "Degree",
+  "dp_or_ds": "dp",
+  "credits": 4,
+  "pre_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "co_req": [
+    "BSC2001",
+    "BSC2002"
+  ],
+  "availability": [
+    "Sept2022",
+    "March2002"
+  ],
+  "instructors": [
+    {
+      "name": "ABCD",
+      "email": "ABCD@efgh.com"
+    },
+    {
+      "name": "EFGH",
+      "email": "ijkl@efgh.com"
+    }
+  ]
+}'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad Request sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+%Feedback tests
+%get course feedback
+\begin{testcase}{82}{PASSED}
+Endpoint \hfill \tcendpoint{/course/\{id\}/feedback}\\
+Category \hfill Feedback\\
+Test Case Description \hfill All required fields present and correct\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 200\\
+Actual Response Code    \hfill 200\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC2001/feedback \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer **'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "feedbacks": [
+    {
+      "id": 1,
+      "poster": "21f2000381@ds.study.iitm.ac.in",
+      "pic": "myprofilepic.png",
+      "rating": 5.6,
+      "description": "This is a good course",
+      "time": "2012-04-23T18:25:43.511Z"
+    }
+  ]
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{83}{PASSED}
+Endpoint \hfill \tcendpoint{/course/\{id\}/feedback}\\
+Category \hfill Courses\\
+Test Case Description \hfill Sent Auth token of wrong user type\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 403\\
+Actual Response Code    \hfill 403\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC2001/feedback \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer **'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Access Denied",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{84}{PASSED}
+Endpoint \hfill \tcendpoint{/course/\{id\}/feedback}\\
+Category \hfill Courses\\
+Test Case Description \hfill Auth token missing or invalid\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 401\\
+Actual Response Code    \hfill 401\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC2001/feedback \
+  --header 'Accept: application/json' 
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "Bad data sent",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+\begin{testcase}{85}{PASSED}
+Endpoint \hfill \tcendpoint{/course/\{id\}/feedback}\\
+Category \hfill Courses\\
+Test Case Description \hfill Id in request does not exist\\
+
+Request Type    \hfill \eptype{GET}\\
+Expected Response Code    \hfill 404\\
+Actual Response Code    \hfill 404\\
+
+Output Status \hfill \opstatus{As Expected}\\
+Result \hfill \tcstatus{PASSED}
+
+\begin{ipblock}{Input Request}
+\begin{minted}[linenos]{bash}
+curl --request GET \
+  --url http://localhost/api/v1/course/BSC2006/feedback \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer **'
+\end{minted}
+\end{ipblock}
+
+\begin{opblock}{Output Response: application/json}
+\begin{minted}[linenos]{json}
+{
+  "message": "The requested resource was not found on this server",
+  "status": "error"
+}
+\end{minted}
+\end{opblock}
+\end{testcase}
+
+

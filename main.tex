@@ -1,0 +1,83 @@
+\documentclass[12pt,oneside,a4paper]{article}
+\usepackage[%
+  a4paper,%
+  left = 20mm,%
+  right = 20mm,%
+  textwidth = 178mm,%
+  top = 22mm,%
+  bottom = 10mm,%
+  heightrounded,%
+  headheight=70pt,%
+  headsep=25pt,%
+]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    allcolors  = blue, 
+}
+
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{color,colortbl}
+
+\definecolor{link-blue}{RGB}{6,69,173}
+\definecolor{dark-green}{RGB}{52,133,62}
+\definecolor{light-blue}{RGB}{127,180,240}
+\definecolor{dark-blue}{RGB}{72,120,224}
+\definecolor{heading-grey}{RGB}{128,128,128}
+\definecolor{heading2-grey}{RGB}{200,200,200}
+\definecolor{Critical}{RGB}{192,0,0}
+\definecolor{High}{RGB}{255,0,0}
+\definecolor{Medium}{RGB}{255,192,0}
+\definecolor{Low}{RGB}{255,255,0}
+\definecolor{Informational}{RGB}{94,185,255}
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{array,booktabs}
+\usepackage{fancyhdr}
+\usepackage{censor}
+\usepackage{pifont}
+\usepackage{fancybox}
+\usepackage{mathptmx}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage[most]{tcolorbox}
+\usepackage[skip=10pt plus1pt, indent=0pt]{parskip}
+\usepackage{titlesec}
+\usepackage[belowskip=-15pt,aboveskip=5pt]{caption}
+\usepackage{minted}
+
+\input{setup}
+
+\newcommand\doctitle{A Learning-Path Recommendation System for IIT(M) B.S. Degree}
+
+\begin{document}
+    \input{title}
+
+    \pagestyle{toc}
+    \pagenumbering{roman}
+    {\hypersetup{linkcolor=black}
+        \tableofcontents
+        % \listoffigures
+        % \listoftables
+    }
+    
+    % \thispagestyle{empty}
+    \newpage    
+    %\StopCensoring
+    \pagestyle{plain}
+    \pagenumbering{arabic}
+    \input{contents/ms1}
+    \input{contents/ms2}
+    \input{contents/ms3}
+    \input{contents/ms5}
+    \input{contents/ms6}
+
+\end{document}

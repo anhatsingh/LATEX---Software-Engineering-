@@ -60,13 +60,17 @@
 
 \begin{document}
     \input{title}
+    
+    \pagestyle{empty}
+    \input{projectCompletion}
 
+    \newpage
     \pagestyle{toc}
-    \pagenumbering{roman}
+    \pagenumbering{roman}    
     {\hypersetup{linkcolor=black}
         \tableofcontents
-        % \listoffigures
-        % \listoftables
+        \listoffigures
+        \listoftables
     }
     
     % \thispagestyle{empty}
@@ -77,6 +81,7 @@
     \input{contents/ms1}
     \input{contents/ms2}
     \input{contents/ms3}
+    \input{contents/ms4}
     \input{contents/ms5}
     \input{contents/ms6}
 

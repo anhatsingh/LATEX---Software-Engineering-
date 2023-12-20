@@ -1,41 +1,183 @@
 \newpage
 
 \section{Project Review}
-\subsection{Technologies Used}
+\subsection{Technologies and Tools Used}
+\subsubsection{Backend}
 \begin{itemize}
     \tightlist
-    \item Python
-    \item Flask 
-    \item Flask-Restful
+    \item Language - Python
+    \item Flask
+    \item Flask-RESTful
     \item Flask-SQLAlchemy
-    \item SQLite
-    \item HTML
-    \item CSS
-    \item JavaScript [ Vue.js, Vuetify, Vue Router ]
+    \item Flask-JWT-Extended
+    \item flask\_expects\_json
+    \item Pandas
 \end{itemize}
 
-\subsection{Tools Used}
+\subsubsection{Frontend}
+\begin{itemize}
+    \tightlist    
+    \item Vue JS 3
+    \item Vuetify 3
+    \item Vue Router 4
+    \item Vue ChartJS
+    \item Cytoscape
+    \item Cytoscape-dagre
+\end{itemize}
+
+\subsubsection{Reports and Documentation}
+\begin{itemize}
+    \tightlist
+    \item Report Making - \LaTeX
+    \item Presentations - Google Slides
+    \item API Documentation - Stoplight
+\end{itemize}
+
+\subsubsection{Other Tools Used}
 \begin{itemize}
     \tightlist
     \item Github (for development environment)
     \item Jira (for schedule tracking)
     \item Google Drive (for documents collaboration)
     \item Google Meet (for collaborative development – pair programming) 
+    \item Whatsapp (for general communication)
 \end{itemize}
 
-\subsection{Relevant Screenshots}
+\subsection{Recommendation System Algorithm}
+The algorithm mentioned in \autoref{fig:recommender_algo} is used to provide recommendation to the students. Once enough data is collected, this algorithm can be replaced with appropriate ML/AI models.
 
 \begin{figure}[H]
     \centering
-    \fbox{\includegraphics[width=1\textwidth]{img/p4.png}}
-    \caption{Github Repo}
-    \label{fig:ghr}
+    \fbox{\includegraphics[width=1\textwidth]{img/recommender.png}}
+    \caption{Algorithm used for Recommendations}
+    \label{fig:recommender_algo}
 \end{figure}
+
+
+\section{Screenshots}
+\subsection{Login Page}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_login.png}}
+    \caption{UI Screenshot - Login Page}
+    \label{fig:ss_login}
+\end{figure}
+
+\subsection{Student Pages}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_home.png}}
+    \caption{UI Screenshot - Student Home Page}
+    \label{fig:ss_s_home}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_profile.png}}
+    \caption{UI Screenshot - Student Profile Page}
+    \label{fig:ss_s_profile}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_completed_courses.png}}
+    \caption{UI Screenshot - Student Completed Courses Page}
+    \label{fig:ss_s_completed_courses}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_all_courses.png}}
+    \caption{UI Screenshot - Student All Courses Page}
+    \label{fig:ss_s_all_courses}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_eachcourse.png}}
+    \caption{UI Screenshot - Student Each Course Details Page}
+    \label{fig:ss_s_each_course}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_feedbacks.png}}
+    \caption{UI Screenshot - Student Each Course Feedback}
+    \label{fig:ss_s_each_course_feedbacks}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_s_feedback2.png}}
+    \caption{UI Screenshot - Student Each Course Give Feedback}
+    \label{fig:ss_s_each_course_give_feedback}
+\end{figure}
+
+\subsection{Admin Pages}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_a_home.png}}
+    \caption{UI Screenshot - Admin Home Page}
+    \label{fig:ss_a_home}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_a_courses.png}}
+    \caption{UI Screenshot - Admin Courses Page}
+    \label{fig:ss_a_courses}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_a_course_edit.png}}
+    \caption{UI Screenshot - Admin Edit Course Info}
+    \label{fig:ss_a_courses_edit}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_a_admins.png}}
+    \caption{UI Screenshot - List of other admins}
+    \label{fig:ss_a_admins_list}
+\end{figure}
+
+\subsection{Course Team Member Pages}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_c_home.png}}
+    \caption{UI Screenshot - Course Team Member Home Page}
+    \label{fig:ss_c_home}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_c_feedback.png}}
+    \caption{UI Screenshot - Course Team Member View Student Feedbacks Page}
+    \label{fig:ss_c_feedbacks}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_c_edit.png}}
+    \caption{UI Screenshot - Course Team Member Edit Course Details Page}
+    \label{fig:ss_c_edit_course}
+\end{figure}
+
+\subsection{IITM Management Member}
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{img/ss_i_courses.png}}
+    \caption{UI Screenshot - IITM Managemnt Member Page}
+    \label{fig:ss_i_courses}
+\end{figure}
+
+\subsection{Github Repository and Google Drive}
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=1\textwidth]{img/p2.png}}
-    \caption{commits done by team members; 42 commits were made during the development phase}
-    \label{fig:ghr2}
+    \caption{Github Repo and the commits done by team members; 74 commits were made during the development phase}
+    \label{fig:ghr}
 \end{figure}
 \begin{figure}[H]
     \centering
@@ -55,7 +197,8 @@ For issue reporting, we have used various platforms like:
     \item Google Docs
 \end{enumerate}
 
-Relevant Images of them are attached in \autoref{fig:issue_pic}
+\autoref{fig:issue_pic} shows screenshots of some of the issues.
+
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=1\textwidth]{img/p1.png}}
@@ -63,8 +206,10 @@ Relevant Images of them are attached in \autoref{fig:issue_pic}
     \label{fig:issue_pic}
 \end{figure}
 
-\section{Video and PPT}
+\section{Github Repo, Video and PPT}
 \begin{itemize}
+    \tightlist
+    \item Github Repository: \href{https://github.com/anhatsingh/Software-Engineering-Project-IITM-Sept2023}{https://github.com/anhatsingh/Software-Engineering-Project-IITM-Sept2023}
     \item Video Link: \href{https://drive.google.com/file/d/1qBHOFE7LGVQW4yHuSdqfwHbBomY6MLy8/view?usp=drive_link}{Google Drive}
     \item PPT Link: \href{https://docs.google.com/presentation/d/1Vz_nPWuxCOxxy0lo2IrWU29k9SOpYvJk/edit?usp=drive_link&ouid=102662878024311248007&rtpof=true&sd=true}{Google Drive}
 \end{itemize}
